@@ -153,6 +153,5 @@ DEBUG_TOOLBAR_PANELS = (
     'debug_toolbar.panels.profiling.ProfilingPanel',
     'pympler.panels.MemoryPanel',
     )
-
 STATIC_URL ="/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
