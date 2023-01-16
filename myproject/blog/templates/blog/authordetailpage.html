@@ -10,7 +10,19 @@
     </style>
 </head>
 <body>
-    <h1>{{object.name}}</h1>
-    <p>{{object.about_author}}</p>
+    <h1> {{context.name}} </h1>
+    <p>{{context.about_author}}</p>
+
+    <h3>Blogs by this authors are given below: </h3>
+    {% for blog in author_detail %}
+    <ul>
+        <li>
+            <a href="{% url 'blog:blogdetailview' blog.id %}">{{ blog.title }}</a>
+            <span>{{blog.posted_date}}</span>
+        </li>
+    </ul>
+    {% endfor %}
+
+    
 </body>
 </html>
