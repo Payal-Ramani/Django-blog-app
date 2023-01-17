@@ -8,10 +8,22 @@
     
 </head>
 <body>
-    <h1>{{ object.title }}</h1>  
-    <p>{{object.posted_date}}</p>
-    <p>{{ object.content }}</p>
+    <h1>{{ context.title }}</h1>  
+    <p><span>Posted on :</span>{{context.posted_date}}</p>
+    <p>{{ context.content }}</p>
+    <p><span>Written by :</span>{{context.author.name}}</p>
+
+    <p>Comments : </p>
+    {% for com in object_list %}
+    <ul>
+        <li>
+            {{com.comment_content}}
+            {{com.commented_date}}
+        </li>
+    </ul>
+    {% endfor %}
     
+    <a href="http://localhost:8000/admin/blog/comment/add/">Click here to add Comments</a>
 </body>
 </html>
 
