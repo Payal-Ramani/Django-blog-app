@@ -1,13 +1,13 @@
 from django.views.generic import TemplateView,ListView,detail
 
-from .models import Blogs,Authors,Comment
+from .models import Blog,Author,Comment
 
 class HomePage(TemplateView):
     template_name = 'blog/homepage.html'
 
 class BlogListView(ListView):
     template_name = 'blog/bloglistpage.html'
-    queryset = Blogs.objects.order_by('-posted_date')
+    queryset = Blog.objects.order_by('-posted_date')
     paginate_by = 5
 
 class BlogDetailView(ListView):
@@ -20,11 +20,11 @@ class BlogDetailView(ListView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["context"] = Blogs.objects.filter(id = self.kwargs["pk"]).first()
+        context["context"] = Blog.objects.filter(id = self.kwargs["pk"]).first()
         return context
 
 class AuthorDetailView(ListView):
-    model = Blogs
+    model = Blog
     template_name = 'blog/authordetailpage.html'
     context_object_name = 'author_detail'
     
@@ -35,9 +35,9 @@ class AuthorDetailView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["context"] = Authors.objects.filter(id=self.kwargs["pk"]).first()
+        context["context"] = Author.objects.filter(id=self.kwargs["pk"]).first()
         return context
 
 class AuthorListView(ListView):
     template_name = 'blog/authorlistpage.html'
-    queryset = Authors.objects.all()
+    queryset = Author.objects.all()
