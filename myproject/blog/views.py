@@ -3,6 +3,7 @@ from .models import Blog,Author,Comment
 from django.shortcuts import render,redirect
 from .forms import CommentForm
 
+
 class HomePage(TemplateView):
     template_name = 'blog/homepage.html'
 
@@ -61,3 +62,4 @@ def CommentPage(request,pk):
         'form' : form,
     }            
     return render(request,'blog/commentcreatepage.html',context)
+
