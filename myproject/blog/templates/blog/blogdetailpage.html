@@ -23,7 +23,7 @@
     </ul>
     {% endfor %}
     
-    <a href="">Click here to add Comments</a>
+    <a href="{% url 'blog:commentpage' context.id %}">Click here to add Comments</a>
 </body>
 </html>
 

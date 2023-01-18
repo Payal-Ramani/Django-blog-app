@@ -9,4 +9,5 @@ urlpatterns = [
     path('blog/<int:pk>/',views.BlogDetailView.as_view(),name='blogdetailview'),
     path('blog/blogger/<int:pk>/',views.AuthorDetailView.as_view(),name='authordetailview'),
     path('blog/bloggers/',views.AuthorListView.as_view(),name='authorlistview'),
+    path('blog/<int:pk>/create/',views.CommentPage,name='commentpage'),
 ]
