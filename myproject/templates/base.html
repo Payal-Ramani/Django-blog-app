@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} Base {% endblock %}</title>
+</head>
+
+<body>
+    {% if user.is_authenticated %}
+    <p>Hi {{ user.username }}! Welcome to this blog site ...</p>
+    <ul>
+        <li>
+            <a href="{% url 'logout' %}">Click here to log out </a>
+        </li>
+    </ul>
+
+    {% else %}
+    <p>You are not logged in...Please login first. </p>
+    <a href="{% url 'login' %}">Click here to Log In </a>
+    {% endif %}
+    <p><a href="{% url 'user:signup' %}">Click here to Sign Up to this blog application</a>
+    </p>
+    <ul>
+        <li>
+            <a href="{% url 'blog:bloglistview' %}"> All Blogs </a>
+        </li>
+    </ul>
+    <ul>
+        <li>
+            <a href="{% url 'blog:authorlistview' %}"> Authors </a>
+        </li>
+    </ul>
+    <div>
+        {% block content %}
+        {% endblock %}
+    </div>
+
+</body>
+
+</html>

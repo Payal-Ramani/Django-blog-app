@@ -2,6 +2,7 @@ from django.views.generic import TemplateView,ListView
 from .models import Blog,Author,Comment
 from django.shortcuts import render,redirect
 from .forms import CommentForm
+from django.contrib.auth.decorators import login_required
 
 class HomePage(TemplateView):
     template_name = 'blog/homepage.html'
@@ -43,6 +44,7 @@ class AuthorListView(ListView):
     template_name = 'blog/authorlistpage.html'
     queryset = Author.objects.all()
 
+@login_required(login_url='/accounts/login/')
 def CommentPage(request,pk):
     blog = Blog.objects.filter(pk=pk).first()
     if request.method == "POST":

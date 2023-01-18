@@ -23,7 +23,6 @@ urlpatterns = [
     path('',include('blog.urls')),
     path('accounts/',include('user.urls')),
     path('accounts/',include('django.contrib.auth.urls')),
-    path('home/',TemplateView.as_view(template_name = 'registration/home.html'),name='home')
 ]
 
 if settings.DEBUG:

@@ -1,28 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Author Detail Page</title>
-    <style>
-        
-    </style>
-</head>
-<body>
-    <h1> {{context.name}} </h1>
-    <p>{{context.about_author}}</p>
+{% extends 'base.html' %}
+{% block title %} Author Detail Page {% endblock %}
+{% block content %}
+<h1> {{context.name}} </h1>
+<p>{{context.about_author}}</p>
 
-    <h3>Blogs by this authors are given below: </h3>
-    {% for blog in author_detail %}
-    <ul>
-        <li>
-            <a href="{% url 'blog:blogdetailview' blog.id %}">{{ blog.title }}</a>
-            <span>{{blog.posted_date}}</span>
-        </li>
-    </ul>
-    {% endfor %}
-
-    
-</body>
-</html>
+<h3>Blogs by this authors are given below: </h3>
+{% for blog in author_detail %}
+<ul>
+    <li>
+        <a href="{% url 'blog:blogdetailview' blog.id %}">{{ blog.title }}</a>
+        <span>{{blog.posted_date}}</span>
+    </li>
+</ul>
+{% endfor %}
+{% endblock %}
