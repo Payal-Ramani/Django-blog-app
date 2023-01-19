@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
+    'user',
     "pympler",
     "debug_toolbar",
 ]
@@ -153,6 +154,8 @@ DEBUG_TOOLBAR_PANELS = (
     'debug_toolbar.panels.profiling.ProfilingPanel',
     'pympler.panels.MemoryPanel',
     )
-
 STATIC_URL ="/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+LOGIN_REDIRECT_URL = "blog:homepage"
+LOGOUT_REDIRECT_URL = "blog:homepage"

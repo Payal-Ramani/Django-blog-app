@@ -1,19 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
-    <style>
-        a:hover {
-            color: green ;
-        }
-    </style>
-</head>
-<body>
-    <h1>Welcome to my blog.....!</h1>
-    <p>This is my first web app using django....in this blog i added so many features which will be added soon by me!</p>
-    <a href="{% url 'blog:bloglistview' %}">Click here to see all blogs...</a>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %} Home Page {% endblock %}
+{% block content %}
+<h1>Welcome to my blog.....!</h1>
+<p>This is my first web app using django....in this blog i added so many features which will be added soon by me!</p>
+
+{% endblock %}
+
+    
