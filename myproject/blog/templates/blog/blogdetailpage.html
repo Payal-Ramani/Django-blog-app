@@ -1,5 +1,20 @@
 {% extends 'base.html' %}
 {% block title %} Blog Detail Page {% endblock %}
+{% block extra_css %}
+<style>
+    p{
+        font-size: large;
+    }
+    a.comment{
+        text-decoration: none;
+        font-size: large;
+    }
+    a.comment:hover{
+        color: green;
+        font-size: larger;
+    }
+</style>
+{% endblock %}
 {% block content %}
 <h1>{{ context.title }}</h1>  
     <p><span>Posted on :</span>{{context.posted_date}}</p>
@@ -16,5 +31,5 @@
     </ul>
     {% endfor %}
     
-    <a href="{% url 'blog:commentpage' context.id %}">Click here to add Comments</a>
+    <a class="comment" href="{% url 'blog:commentpage' context.id %}">Click here to add Comments</a>
 {% endblock %}

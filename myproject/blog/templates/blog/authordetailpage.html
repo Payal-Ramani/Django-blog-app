@@ -1,14 +1,29 @@
 {% extends 'base.html' %}
 {% block title %} Author Detail Page {% endblock %}
+{% block extra_css %}
+<style>
+    p{
+        font-size: large;
+    }
+    a.blog{
+        text-decoration: none;
+        font-size: large;
+    }
+    a.blog:hover{
+        color: green;
+        font-size: larger;
+    }
+</style>
+{% endblock %}
 {% block content %}
 <h1> {{context.name}} </h1>
 <p>{{context.about_author}}</p>
 
-<h3>Blogs by this authors are given below: </h3>
+<h3>Blogs by this author are given below: </h3>
 {% for blog in author_detail %}
 <ul>
     <li>
-        <a href="{% url 'blog:blogdetailview' blog.id %}">{{ blog.title }}</a>
+        <a class="blog" href="{% url 'blog:blogdetailview' blog.id %}">{{ blog.title }}</a>
         <span>{{blog.posted_date}}</span>
     </li>
 </ul>
