@@ -99,6 +99,7 @@
         <p class="user">If you do not have an account..Then Sign Up first..</p>
         <p><a href="{% url 'user:signup' %}"> Sign Up </a>
         {% endif %}
+
         </p>
         <ul>
             <li>
@@ -113,6 +114,7 @@
     </div>
     <div>
         <button id='openbtn' class="openbtn" onclick="openNav()">☰</button>
+
     </div>
     <div id="main">
         {% block content %}

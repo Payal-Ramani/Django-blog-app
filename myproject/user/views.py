@@ -3,10 +3,8 @@ from .forms import NewUserForm
 from django.contrib.auth import login
 from django.contrib.auth.decorators import user_passes_test
 
-
 def user_not_logged_in(user):
     return not user.is_authenticated
-
 
 @user_passes_test(
     user_not_logged_in, login_url="blog:homepage", redirect_field_name=None
