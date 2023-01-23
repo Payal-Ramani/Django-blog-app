@@ -13,11 +13,30 @@
         color: green;
         font-size: larger;
     }
+    .header {
+        padding: 10px;
+        font-size: 25px;
+        text-align: center;
+    }
+    .author{
+        padding: 5px;
+    }
+    #aboutauthor{
+        font-size: 30px;
+        font-weight: bold;
+    }
+    
+
 </style>
 {% endblock %}
 {% block content %}
-<h1> {{context.name}} </h1>
-<p>{{context.about_author}}</p>
+<div class="header">
+    <h1> {{context.name}} </h1>
+</div>
+<div class="author">
+    <p id="aboutauthor">About Author:</p>
+    <p>{{context.about_author}}</p>
+</div>
 
 <h3>Blogs by this author are given below: </h3>
 {% for blog in author_detail %}
