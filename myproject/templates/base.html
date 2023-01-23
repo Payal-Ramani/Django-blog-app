@@ -96,8 +96,9 @@
         {% else %}
         <p class="user">You are not logged in...Please login first. </p>
         <p><a href="{% url 'login' %}"> Log In </a></p>
-        {% endif %}
+        <p class="user">If you do not have an account..Then Sign Up first..</p>
         <p><a href="{% url 'user:signup' %}"> Sign Up </a>
+        {% endif %}
         </p>
         <ul>
             <li>
@@ -111,7 +112,7 @@
         </ul>
     </div>
     <div>
-        <button id='openbtn' class="openbtn" onclick="openNav()">☰ Open Sidebar</button>
+        <button id='openbtn' class="openbtn" onclick="openNav()">☰</button>
     </div>
     <div id="main">
         {% block content %}
