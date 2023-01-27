@@ -35,5 +35,8 @@ jobs:
         DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
         DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
         DATABASE_PASS: ${{ secrets.DATABASE_PASSWORD }}
+    - name: Copy .env file
+      run: |
+        if [ -f .env.example ]; then cp .env.example .env; fi
     - name: Run tests with pytest
       run: pytest
