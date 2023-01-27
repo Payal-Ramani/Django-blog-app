@@ -1,58 +1,38 @@
-name: Example CI Django + Postgres Tests
+name: Django Tests
 
-# Controls when the workflow will run
 on:
-  # Allows you to call this workflow within another workflow
-  workflow_call:
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-  # Triggered based on the git event type
   push:
-    branches: [main]
+    branches:
+      - main
+  
   pull_request:
-    branches: [main]
+    branches:
+      - main
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
+
     runs-on: ubuntu-latest
-    # Add in environment variables for the entire "build" job
-   
-    # If you want to test multiple python version(s)
-    strategy:
-      matrix:
-        python-version: ["3.9"] # ["3.8", "3.9", "3.10"]
-    # Steps represent a sequence of tasks that will be executed as part of the job
+
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Setup Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
-        with:
-          python-version: ${{ matrix.python-version }}
-      - name: Install requirements
-        run: |
-          pip install -r myproject/requirements.txt
-      - name: Lint with flake8
-        run: |
-          pip install flake8
-          flake8
-      - name: Coverage report
-        run: |
-          pip install coverage
-          coverage run manage.py test
-          coverage report
-      - name: Run Tests
-        # Step specific environment variables
-        env:
-          DJANGO_SECRET_KEY: ${{ secrets.SECRET_KEY }}
-          POSTGRES_DB: ${{ secrets.DATABASE_NAME }}
-          POSTGRES_USER: ${{ secrets.DATABASE_USER }}
-          POSTGRES_PASSWORD : ${{ secrets.DATABASE_PASS }}
-          POSTGRES_HOST: ${{ secrets.DATABASE_HOST }}
-          POSTGRES_PORT: ${{ secrets.DATABASE_PORT }}
-        run: |
-          python myproject/manage.py test
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r myproject/requirements.txt
+    - name: Install pytest
+      run: |
+        pip install pytest
+    - name: Configuring Secrets
+      run: echo "DJANGO_SECRET_KEY=${{ secrets.SECRET_KEY }}" >> $GITHUB_ENV
+    - name: Run tests with pytest
+      run: pytest
+    - name: Coverage report
+      run: |
+        pip install coverage
+        coverage run -m pytest
+        coverage report
