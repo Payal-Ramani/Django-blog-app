@@ -12,7 +12,8 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
-
+env:
+  SECRET_KEY: ${{ secrets.SECRET_KEY }}
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -27,7 +28,7 @@ jobs:
       POSTGRES_HOST: localhost # default host value for the database
       POSTGRES_DB: testdatabase
       POSTGRES_PORT: 5432
-      DJANGO_SECRET_KEY: ${{ secrets.<SECRET_KEY> }}
+      DJANGO_SECRET_KEY: ${{ secrets.SECRET_KEY }}
     services:
       postgres_main:
         image: postgres:12
@@ -61,11 +62,11 @@ jobs:
       - name: Run Tests
         # Step specific environment variables
         env:
-          DJANGO_SECRET_KEY: ${{ secrets.<SECRET_KEY> }}
-          DB_USERNAME: ${{ secrets.<DATABASE_USER> }}
-          DB_PASSWORD: ${{ secrets.DATABASE_PASS> }}
-          DB_HOST: ${{ secrets.<DATABASE_HOST> }}
-          DB_DATABASE: ${{ secrets.<DATABASE_NAME> }}
-          DB_PORT: ${{ secrets.<DATABASE_PORT> }}
+          DJANGO_SECRET_KEY: ${{ env.SECRET_KEY }}
+          DB_USERNAME: ${{ secrets.DATABASE_USER }}
+          DB_PASSWORD: ${{ secrets.DATABASE_PASS }}
+          DB_HOST: ${{ secrets.DATABASE_HOST }}
+          DB_DATABASE: ${{ secrets.DATABASE_NAME }}
+          DB_PORT: ${{ secrets.DATABASE_PORT }}
         run: |
           python myproject/manage.py test blog
