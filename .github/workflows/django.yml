@@ -28,13 +28,12 @@ jobs:
     - name: Install python-dotenv
       run: pip install python-dotenv 
     - name: Configure environment variables
-      run: |
-        echo "SECRET_KEY=${SECRET_KEY}" >> $GITHUB_ENV
-        echo "DATABASE_NAME=${DATABASE_NAME}" >> $GITHUB_ENV
-        echo "DATABASE_USER=${DATABASE_USER}" >> $GITHUB_ENV
-        echo "DATABASE_HOST=${DATABASE_HOST}" >> $GITHUB_ENV
-        echo "DATABASE_PORT=${DATABASE_PORT}" >> $GITHUB_ENV
-        echo "DATABASE_PASS=${DATABASE_PASS}" >> $GITHUB_ENV
-
+      env:
+        SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
+        DATABASE_USER: ${{ secrets.DATABASE_USER }}
+        DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
+        DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
+        DATABASE_PASS: ${{ secrets.DATABASE_PASSWORD }}
     - name: Run tests with pytest
       run: pytest
