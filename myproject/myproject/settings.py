@@ -99,6 +99,14 @@ DATABASES = {
         "PORT": os.getenv("DATABASE_PORT"),
         "PASSWORD": os.getenv("DATABASE_PASS"),
     },
+    "test": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": "testdatabase",
+        "USER": "postgresql",
+        "PASSWORD": os.getenv("DATABASE_PASS"),
+        "HOST": "127.0.0.1",
+        "PORT": "5432",
+    },
 }
 
 # Password validation
