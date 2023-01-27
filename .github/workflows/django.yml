@@ -36,7 +36,5 @@ jobs:
         echo "DATABASE_PORT=${DATABASE_PORT}" >> $GITHUB_ENV
         echo "DATABASE_PASS=${DATABASE_PASS}" >> $GITHUB_ENV
 
-    - name: Copy .env file
-      run: cp .env.example .env
     - name: Run tests with pytest
       run: pytest
