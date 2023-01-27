@@ -25,7 +25,6 @@ jobs:
       POSTGRES_HOST: localhost # default host value for the database
       POSTGRES_DB: testdatabase
       POSTGRES_PORT: 5432
-      DJANGO_SECRET_KEY: ${{ secrets.SECRET_KEY }}
     services:
       postgres_main:
         image: postgres:12
@@ -58,6 +57,15 @@ jobs:
           pip install -r myproject/requirements.txt
       - name: Run Tests
         # Step specific environment variables
+jobs:
+  default-env-variables:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Testing Secrets
+        run: | 
+          echo "$DJANGO_SECRET_KEY"
+          python myproject/manage.py test blog
+                
         env:
           DJANGO_SECRET_KEY: ${{ secrets.SECRET_KEY }}
           DB_USERNAME: ${{ secrets.DATABASE_USER }}
@@ -65,5 +73,4 @@ jobs:
           DB_HOST: ${{ secrets.DATABASE_HOST }}
           DB_DATABASE: ${{ secrets.DATABASE_NAME }}
           DB_PORT: ${{ secrets.DATABASE_PORT }}
-        run: |
-          python myproject/manage.py test blog
+          
