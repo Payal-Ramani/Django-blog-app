@@ -34,10 +34,10 @@ jobs:
       env:
         SECRET_KEY: ${{ secrets.SECRET_KEY }}
         DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
-        DATABASE_USER: ${{ secrets.DATABASE_NAME }}
-        DATABASE_HOST: ${{ secrets.DATABASE_NAME }}
-        DATABASE_PORT: ${{ secrets.DATABASE_NAME }}
-        DATABASE_PASS: ${{ secrets.DATABASE_NAME }}
+        DATABASE_USER: ${{ secrets.DATABASE_USER }}
+        DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
+        DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
+        DATABASE_PASS: ${{ secrets.DATABASE_PASS }}
         
     - name: Copy .env file
       run: |
