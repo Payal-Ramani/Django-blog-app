@@ -41,9 +41,15 @@ jobs:
         DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
         DATABASE_PASS: ${{ secrets.DATABASE_PASSWORD }}
         
-    - name: Copy .env file
+    - name: Create .env file
       run: |
-        if [ -f .env.example ]; then cp .env.example .env; fi
+        echo "SECRET_KEY=${{ env.SECRET_KEY }}" > .env
+        echo "DATABASE_NAME=${{ env.DATABASE_NAME }}" >> .env
+        echo "DATABASE_USER=${{ env.DATABASE_USER }}" >> .env
+        echo "DATABASE_HOST=${{ env.DATABASE_HOST }}" >> .env
+        echo "DATABASE_PORT=${{ env.DATABASE_PORT }}" >> .env
+        echo "DATABASE_PASS=${{ env.DATABASE_PASS }}" >> .env
+
         
     - name: Run tests with pytest
       run: pytest
