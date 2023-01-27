@@ -1,3 +1,4 @@
+
 name: Example CI Django + Postgres Tests
 
 # Controls when the workflow will run
@@ -25,12 +26,7 @@ jobs:
       POSTGRES_HOST: localhost # default host value for the database
       POSTGRES_DB: testdatabase
       POSTGRES_PORT: 5432
-      DJANGO_SECRET_KEY: ${{ secrets.SECRET_KEY }
-      DB_USERNAME: ${{ secrets.DATABASE_USER }}
-      DB_PASSWORD: ${{ secrets.DATABASE_PASS }}
-      DB_HOST: ${{ secrets.DATABASE_HOST }}
-      DB_DATABASE: ${{ secrets.DATABASE_NAME }}
-      DB_PORT: ${{ secrets.DATABASE_PORT }}
+      DJANGO_SECRET_KEY: ${{ secrets.SECRET_KEY }}
     services:
       postgres_main:
         image: postgres:12
@@ -62,17 +58,13 @@ jobs:
         run: |
           pip install -r myproject/requirements.txt
       - name: Run Tests
-     
         # Step specific environment variables
-          
-          
-      - name: Do something with the database connection
+        env:
+          DJANGO_SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          DB_USERNAME: ${{ secrets.DATABASE_USER }}
+          DB_PASSWORD: ${{ secrets.DATABASE_PASS }}
+          DB_HOST: ${{ secrets.DATABASE_HOST }}
+          DB_DATABASE: ${{ secrets.DATABASE_NAME }}
+          DB_PORT: ${{ secrets.DATABASE_PORT }}
         run: |
-          echo "Connecting to the database..."
-          echo "secret_key: $DJANGO_SECRET_KEY"
-          echo "host: $DB_HOST"
-          echo "user: $DB_USER"
-          echo "password: $DB_PASSWORD"
-          echo "database: $DB_NAME"   
-          echo "port: $DB_PORT"
           python myproject/manage.py test blog
