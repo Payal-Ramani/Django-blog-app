@@ -4,18 +4,17 @@ on:
   push:
     branches:
       - main
-  
   pull_request:
     branches:
       - main
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout
+      uses: actions/checkout@v2
     - name: Set up Python 3.9
       uses: actions/setup-python@v2
       with:
@@ -25,11 +24,9 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r myproject/requirements.txt
     - name: Install pytest
-      run: |
-        pip install pytest
+      run: pip install pytest
     - name: Install python-dotenv
-      run: |
-        pip install python-dotenv 
+      run: pip install python-dotenv 
     - name: Configure environment variables
       env:
         SECRET_KEY: ${{ secrets.SECRET_KEY }}
@@ -38,10 +35,7 @@ jobs:
         DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
         DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
         DATABASE_PASS: ${{ secrets.DATABASE_PASS }}
-        
     - name: Copy .env file
-      run: |
-        cp .env.example .env
+      run: cp .env.example .env
     - name: Run tests with pytest
       run: pytest
-    
