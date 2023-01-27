@@ -33,7 +33,6 @@ jobs:
       POSTGRES_HOST: localhost # default host value for the database
       POSTGRES_DB: testdatabase
       POSTGRES_PORT: 5432
-      DJANGO_SECRET_KEY: ${{ env.SECRET_KEY }}
     services:
       postgres_main:
         image: postgres:12
@@ -67,6 +66,7 @@ jobs:
       - name: Run Tests
         # Step specific environment variables
         env:
+          DJANGO_SECRET_KEY: ${{ env.SECRET_KEY }}
           DB_USERNAME: ${{ env.DB_USERNAME }}
           DB_PASSWORD: ${{ env.DB_PASSWORD }}
           DB_HOST: ${{ env.DB_HOST }}
