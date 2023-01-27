@@ -21,7 +21,7 @@ jobs:
     # Add in environment variables for the entire "build" job
     env:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: ${{ secrets.DATABASE_PASS }}
+      POSTGRES_PASSWORD: payal@3421
       POSTGRES_HOST: localhost # default host value for the database
       POSTGRES_DB: testdatabase
       POSTGRES_PORT: 5432
