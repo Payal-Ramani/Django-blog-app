@@ -13,6 +13,15 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 import os
 
+# import environ
+from dotenv import load_dotenv
+
+load_dotenv()
+
+# Initialise environment variables
+# env = environ.Env()
+# environ.Env.read_env()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -21,7 +30,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-bwd9d28t+(6ckyb4rula+-w@xl6o^o&=4$)36vcdgu-9%s*4yq"
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -83,15 +92,22 @@ WSGI_APPLICATION = "myproject.wsgi.application"
 
 DATABASES = {
     "default": {
-        "NAME": "postgres",
-        "USER": "postgres",
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "HOST": "localhost",
+        "NAME": os.getenv("DATABASE_NAME"),
+        "USER": os.getenv("DATABASE_USER"),
+        "HOST": os.getenv("DATABASE_HOST"),
+        "PORT": os.getenv("DATABASE_PORT"),
+        "PASSWORD": os.getenv("DATABASE_PASS"),
+    },
+    "test": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": "testdatabase",
+        "USER": "postgresql",
+        "PASSWORD": os.getenv("DATABASE_PASS"),
+        "HOST": "127.0.0.1",
         "PORT": "5432",
-        "PASSWORD": "payal@3421",
     },
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
