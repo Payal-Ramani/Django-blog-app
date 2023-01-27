@@ -21,11 +21,11 @@ jobs:
     # Add in environment variables for the entire "build" job
     env:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: payal@3421
+      POSTGRES_PASSWORD: postgres
       POSTGRES_HOST: localhost # default host value for the database
-      POSTGRES_DB: postgres
+      POSTGRES_DB: djtesting
       POSTGRES_PORT: 5432
-      DJANGO_SECRET_KEY: django-insecure-bwd9d28t+(6ckyb4rula+-w@xl6o^o&=4$)36vcdgu-9%s*4yq
+      DJANGO_SECRET_KEY: ${{ secrets.SECRET_KEY }}
     services:
       postgres_main:
         image: postgres:12
@@ -39,7 +39,8 @@ jobs:
           --health-cmd pg_isready 
           --health-interval 10s 
           --health-timeout 5s 
-          --health-retries 5
+          --health-retries 5  
+    
     # If you want to test multiple python version(s)
     strategy:
       matrix:
@@ -56,14 +57,18 @@ jobs:
       - name: Install requirements
         run: |
           pip install -r myproject/requirements.txt
+      - name: Run migrations
+        run: |
+          python myproject/manage.py makemigrations
+          python myproject/manage.py migrate    
       - name: Run Tests
         # Step specific environment variables
         env:
-          DJANGO_SECRET_KEY: ${{ env.DJANGO_SECRET_KEY }}
-          DB_USERNAME: ${{ env.POSTGRES_USER }}
-          DB_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
-          DB_HOST: ${{ env.POSTGRES_HOST }}
-          DB_DATABASE: ${{ env.POSTGRES_DB }}
-          DB_PORT: ${{ env.POSTGRES_PORT }}
+          DJANGO_SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          POSTGRES_DB: ${{ secrets.DATABASE_NAME }}
+          POSTGRES_USER: ${{ secrets.DATABASE_USER }}
+          POSTGRES_PASSWORD : ${{ secrets.DATABASE_PASS }}
+          POSTGRES_HOST: ${{ secrets.DATABASE_HOST }}
+          POSTGRES_PORT: ${{ secrets.DATABASE_PORT }}
         run: |
           python myproject/manage.py test blog
